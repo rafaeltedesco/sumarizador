@@ -36,7 +36,7 @@ def process_file(filename):
 
     return resumo
 
-  elif (filename.split('.')[1] == 'txt'):
+  elif (filename.split('.')[1] in ['txt', 'doc', 'docx']):
     with open(filename, 'r') as f:
       text = f.readlines()
     
@@ -45,7 +45,7 @@ def process_file(filename):
     return resumo
 
   else:
-    print('Arquivo não é pdf ou txt')
+    print('Arquivo não é pdf, txt ou doc')
 
 def summarize(text):
   text = ' '.join(text).strip().replace('\n','')

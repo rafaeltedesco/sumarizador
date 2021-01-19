@@ -5,7 +5,7 @@ import secrets
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = 'documentos/resumos'
-ALLOWED_EXTENSIONS = {'txt', 'pdf'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'doc', 'docx'}
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
