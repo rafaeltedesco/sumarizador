@@ -1,4 +1,5 @@
 import PyPDF2
+import docx2txt
 import nltk
 from nltk import sent_tokenize
 from nltk import word_tokenize
@@ -36,10 +37,16 @@ def process_file(filename):
 
     return resumo
 
-  elif (filename.split('.')[1] in ['txt', 'doc', 'docx']):
-    with open(filename, 'rb') as f:
+  elif (filename.split('.')[1] == 'txt'):
+    with open(filename, 'r') as f:
       text = f.readlines()
     
+    resumo = summarize(text)
+
+    return resumo
+  elif (filename.split('.')[1] in ['doc', 'docx']):
+    text = docx2txt.process(filename)
+
     resumo = summarize(text)
 
     return resumo
