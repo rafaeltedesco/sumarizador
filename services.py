@@ -47,6 +47,8 @@ def process_file(filename):
   elif (filename.split('.')[1] in ['doc', 'docx']):
     text = docx2txt.process(filename)
 
+    print(text)
+
     resumo = summarize(text)
 
     return resumo
