@@ -41,4 +41,5 @@ def upload():
 
     return render_template('resumo.html', resumo=resumo, filename=filename)
 
-app.run()
+if __name__ == '__main__':
+  app.run()
