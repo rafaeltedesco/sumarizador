@@ -37,7 +37,7 @@ def process_file(filename):
     return resumo
 
   elif (filename.split('.')[1] in ['txt', 'doc', 'docx']):
-    with open(filename, 'r') as f:
+    with open(filename, 'rb') as f:
       text = f.readlines()
     
     resumo = summarize(text)
