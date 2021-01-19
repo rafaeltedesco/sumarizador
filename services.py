@@ -32,23 +32,38 @@ def process_file(filename):
     for i in range(fileReader.numPages):
       text.append(fileReader.getPage(i).extractText())
     
-    text = ' '.join(text).strip().replace('\n','')
-    sents = sent_tokenize(text)
-    words = word_tokenize(text)
-    words = list(filter(lambda word: word.lower() not in stops, words))
+    resumo = summarize(text)
 
-    freq = FreqDist(words)
-    sentencas_importantes = defaultdict(int)
+    return resumo
 
-    for i, sentenca in enumerate(sents):
-      for palavra in word_tokenize(sentenca.lower()):
-        if palavra in freq:
-          sentencas_importantes[i] += freq[palavra]
+  elif (filename.split('.')[1] == 'txt'):
+    with open(filename, 'r') as f:
+      text = f.readlines()
+    
+    resumo = summarize(text)
 
-    return (sentencas_importantes, sents)
+    return resumo
 
   else:
-    print('Arquivo não é pdf')
+    print('Arquivo não é pdf ou txt')
+
+def summarize(text):
+  text = ' '.join(text).strip().replace('\n','')
+  sents = sent_tokenize(text)
+  words = word_tokenize(text)
+  words = list(filter(lambda word: word.lower() not in stops, words))
+
+  freq = FreqDist(words)
+  sentencas_importantes = defaultdict(int)
+
+  for i, sentenca in enumerate(sents):
+    for palavra in word_tokenize(sentenca.lower()):
+      if palavra in freq:
+        sentencas_importantes[i] += freq[palavra]
+
+  return (sentencas_importantes, sents)
+
+
 
 def summary(filename, n_paragraphs):
   data = process_file(filename)
