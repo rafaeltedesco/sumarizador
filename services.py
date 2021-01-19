@@ -1,5 +1,6 @@
 import PyPDF2
 import docx2txt
+import textract
 import nltk
 from nltk import sent_tokenize
 from nltk import word_tokenize
@@ -45,9 +46,7 @@ def process_file(filename):
 
     return resumo
   elif (filename.split('.')[1] in ['doc', 'docx']):
-    text = docx2txt.process(filename)
-
-    print(text)
+    text = textract.process(filename)
 
     resumo = summarize(text)
 
