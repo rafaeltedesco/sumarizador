@@ -55,7 +55,7 @@ def process_file(filename):
     print('Arquivo não é pdf, txt ou doc')
 
 def summarize(text):
-  text = ' '.join(text).strip().replace('\n','')
+  text = ' '.join(text).strip().replace('\n',' ').replace('\t',' ')
   sents = sent_tokenize(text)
   words = word_tokenize(text)
   words = list(filter(lambda word: word.lower() not in stops, words))
